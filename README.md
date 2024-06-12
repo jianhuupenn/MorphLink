@@ -5,7 +5,7 @@
 
 #### Jing Huang, Chenyang Yuan, Jiahui Jiang, Jianfeng Chen, Sunil S. Badve, Yesim Gokmen-Polar, Rossana L. Segura, Xinmiao Yan, Alexander Lazar, Jianjun Gao, Michael Epstein, Linghua Wang* and Jian Hu*
 
-MorphLink is a computational framework  to systematically identify disease-related morphological-molecular interplays in multi-modal spatial omics analyses. MorphLink has been evaluated across a wide array of datasets, showcasing its effectiveness in extracting and linking interpretable morphological features with various molecular measurements. These linkages provide a transparent depiction of cellular behaviors that drive transcriptomic heterogeneity and immune diversity across different regions within diseased tissues, such as cancer.  MorphLink is scalable and robust against cross-sample batch effects, making it an efficient method for integrative spatial omics data analysis across samples, cohorts, and modalities, and enhancing the interpretation of results for large-scale studies. MorphLinkis applicable to various type of spatial omics data, including spatial transcriptomics (Spatial Transcriptomics, SLIDE-seq, SLIDE-seqV2, HDST, 10x Visium, Xenium, MERSCOPE), spatial protein abundance. 
+MorphLink is a computational framework  to systematically identify disease-related morphological-molecular interplays in multi-modal spatial omics analyses. MorphLink has been evaluated across a wide array of datasets, showcasing its effectiveness in extracting and linking interpretable morphological features with various molecular measurements. These linkages provide a transparent depiction of cellular behaviors that drive transcriptomic heterogeneity and immune diversity across different regions within diseased tissues, such as cancer.  MorphLink is scalable and robust against cross-sample batch effects, making it an efficient method for integrative spatial omics data analysis across samples, cohorts, and modalities, and enhancing the interpretation of results for large-scale studies. MorphLinkis applicable to various type of spatial omics data, including spatial transcriptomics (Spatial Transcriptomics, SLIDE-seq, SLIDE-seqV2, HDST, 10x Visium, Xenium, MERSCOPE), spatial protein abundance, 
 
 ![MorphLink workflow](docs/asserts/images/workflow.jpg)
 <br>
@@ -16,7 +16,7 @@ For thorough details, see the preprint: [Biorxiv](https://www.biorxiv.org/)
 
 With [**MprphLink**](https://github.com/jianhuupenn/MorphLink) package, you can:
 
-- Extract interpretable morphological features in a label-free manner.
+- Extract interpretable morphological features from histology images in a label-free manner.
 - Quantify the relationships between cell morphological and molecular features in a spatial context.
 - Visually examine how cellular behavior changes from both morphological and molecular perspectives.
 
