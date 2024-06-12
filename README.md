@@ -5,7 +5,7 @@
 
 #### Jing Huang, Chenyang Yuan, Jiahui Jiang, Jianfeng Chen, Sunil S. Badve, Yesim Gokmen-Polar, Rossana L. Segura, Xinmiao Yan, Alexander Lazar, Jianjun Gao, Michael Epstein, Linghua Wang* and Jian Hu*
 
-SpaGCN is a graph convolutional network to integrate gene expression and histology to identify spatial domains and spatially variable genes. To jointly model all spots in a tissue slide, SpaGCN integrates information from gene expression, spatial locations and histological pixel intensities across spots into an undirected weighted graph. Each vertex in the graph contains gene expression information of a spot and the edge weight between two vertices quantifies their expression similarity that is driven by spatial dependency of their coordinates and the corresponding histology. To aggregate gene expression of each spot from its neighboring spots, SpaGCN utilizes a convolutional layer based on edge weights specified by the graph. The aggregated gene expression is then fed into a deep embedding clustering algorithm to cluster the spots into different spatial domains. After spatial domains are identified, genes that are enriched in each spatial domain can be detected by differential expression analysis between domains. SpaGCN is applicable to both in-situ transcriptomics with single-cell resolution (seqFISH, seqFISH+, MERFISH, STARmap, and FISSEQ) and spatial barcoding based transcriptomics (Spatial Transcriptomics , SLIDE-seq, SLIDE-seqV2, HDST, 10x Visium, DBiT-seq, Stero-seq, and PIXEL-seq) data. 
+MorphLink is a computational framework  to systematically identify disease-related morphological-molecular interplays in multi-modal spatial omics analyses. MorphLink has been evaluated across a wide array of datasets, showcasing its effectiveness in extracting and linking interpretable morphological features with various molecular measurements. These linkages provide a transparent depiction of cellular behaviors that drive transcriptomic heterogeneity and immune diversity across different regions within diseased tissues, such as cancer.  MorphLink is scalable and robust against cross-sample batch effects, making it an efficient method for integrative spatial omics data analysis across samples, cohorts, and modalities, and enhancing the interpretation of results for large-scale studies. MorphLinkis applicable to various type of spatial omics data, including spatial transcriptomics (Spatial Transcriptomics, SLIDE-seq, SLIDE-seqV2, HDST, 10x Visium, Xenium, MERSCOPE), spatial protein abundance. 
 
 ![MorphLink workflow](docs/asserts/images/workflow.jpg)
 <br>
@@ -14,27 +14,26 @@ For thorough details, see the preprint: [Biorxiv](https://www.biorxiv.org/)
 
 ## Usage
 
-The [**MprphLink**](https://github.com/jianhuupenn/MorphLink) package is an implementation of a garph convolutional network for spatial transcriptomics. With SpaGCN, you can:
+With [**MprphLink**](https://github.com/jianhuupenn/MorphLink) package, you can:
 
-- Preprocess spatial transcriptomics data from various formats.
-- Build a graph convolutional network with deep iterative clustering algorithm to identify spatial domains
-- identify spatially variable genes for each spatial domain.
-- Create mete genes to mark each spatial domains
+- Extract interpretable morphological features in a label-free manner.
+- Quantify the relationships between cell morphological and molecular features in a spatial context.
+- Visually examine how cellular behavior changes from both morphological and molecular perspectives.
 
 
 ## Tutorial
 
 For the step-by-step tutorial, please refer to: 
 <br>
-https://github.com/jianhuupenn/SpaGCN/blob/master/tutorial/tutorial.md
+https://github.com/jianhuupenn/
 <br>
 A Jupyter Notebook of the tutorial is accessible from : 
 <br>
-https://github.com/jianhuupenn/SpaGCN/blob/master/tutorial/tutorial.ipynb
+https://github.com/jianhuupenn/
 <br>
 Toy data and results can be downloaded at: 
 <br>
-https://drive.google.com/drive/folders/1zten54vkjorp26T4iD0ApQGa9ut5eY42?usp=sharing
+https://drive.google.com/drive/folders/
 <br>
 Please install Jupyter in order to open this notebook.
 
@@ -60,11 +59,11 @@ Environment 3:
 
 ## Contributing
 
-Souce code: [Github](https://github.com/jianhuupenn/SpaGCN)  
+Souce code: [Github](https://github.com/jianhuupenn/MorphLink)  
 
 We are continuing adding new features. Bug reports or feature requests are welcome. 
 
-Last update: 06/19/2021, version 1.2.0
+Last update: 06/10/2024, version 1.0.0
 
 
 
