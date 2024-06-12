@@ -38,23 +38,6 @@ https://drive.google.com/drive/folders/1zten54vkjorp26T4iD0ApQGa9ut5eY42?usp=sha
 <br>
 Please install Jupyter in order to open this notebook.
 
-#### New Features! EZ Mode SpaGCN now available.
-For users who are new to Python, we provide an Easy Mode SpaGCN. The parameter setting and intermedium steps are simplified.
-<br>
-Important Notes: This easy mode ONLY have basic functions and is ONLY for analysis purpose.
-<br>
-For method comparison, debugging, customizing parameters, and checking intermedium outputs, please refer to the detailed tutorial above.
-<br>
-Easy Mode SpaGCN tutorial: 
-<br>
-https://github.com/jianhuupenn/SpaGCN/blob/master/tutorial/tutorial_ez_mode.md
-<br>
-Easy Mode SpaGCN Jupyter Notebook: 
-<br>
-https://github.com/jianhuupenn/SpaGCN/blob/master/tutorial/tutorial_ez_mode.ipynb
-<br>
-
-
 ## System Requirements
 Python support packages: igraph, torch, pandas, numpy, scipy, scanpy > 1.5, anndata, louvain, sklearn.
 
@@ -89,6 +72,6 @@ Last update: 06/19/2021, version 1.2.0
 
 Please consider citing the following reference:
 
-- https://www.nature.com/articles/s41592-021-01255-8
+- https://www.
 
 <br>
