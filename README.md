@@ -14,7 +14,7 @@ For thorough details, see the preprint: [Biorxiv](https://www.biorxiv.org/)
 
 ## Usage
 
-With [**MprphLink**](https://github.com/jianhuupenn/MorphLink) package, you can:
+With [**MorphLink**](https://github.com/jianhuupenn/MorphLink) package, you can:
 
 - Extract interpretable morphological features from histology images in a label-free manner.
 - Quantify the relationships between cell morphological and molecular features in a spatial context.
