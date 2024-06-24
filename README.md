@@ -25,15 +25,16 @@ With [**MorphLink**](https://github.com/jianhuupenn/MorphLink) package, you can:
 
 For the step-by-step tutorial, please refer to: 
 <br>
-https://github.com/jianhuupenn/
+https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/MorphLink_tutorial.md
 <br>
 A Jupyter Notebook of the tutorial is accessible from : 
 <br>
-https://github.com/jianhuupenn/
+https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/MorphLink_tutorial.ipynb
 <br>
 Toy data and results can be downloaded at: 
 <br>
-https://drive.google.com/drive/folders/
+https://drive.google.com/drive/folders/1NgJICg1jFD2HP7WGZ9vXk7GrRJRoFfSD?usp=sharing
+https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/results
 <br>
 Please install Jupyter in order to open this notebook.
 
