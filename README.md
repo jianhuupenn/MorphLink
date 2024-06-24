@@ -46,23 +46,18 @@ https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures
 <br>
 
 ## System Requirements
-Python support packages: igraph, torch, pandas, numpy, scipy, scanpy > 1.5, anndata, louvain, sklearn.
+Python support packages: pandas, numpy, numba, scipy, scanpy, anndata, scikit-learn, scikit-image, matplotlib, imutils, opencv-python.
 
 ## Versions the software has been tested on
 Environment 1:
-- System: Mac OS 10.13.6
-- Python: 3.7.0
-- Python packages: pandas = 1.1.3, numpy = 1.18.1,numba=0.53.1 python-igraph=0.7.1,torch=1.5.1,louvain=0.6.1,scipy = 1.4.1, scanpy = 1.5.1, anndata = 0.6.22.post1, natsort = 7.0.1, sklearn = 0.22.1
+- System: Mac OS Sonoma 14.0
+- Python: 3.11.5
+- Python packages: pandas = 2.1.4, numpy = 1.26.2, numba = 0.58.1, scipy = 1.11.4, scanpy = 1.9.6, anndata = 0.10.3, scikit-learn = 1.3.2, scikit-image = 0.23.2, matplotlib = 3.8.2, imutils = 0.5.4, opencv-python = 4.8.1.
 
 Environment 2:
-- System: Anaconda
-- Python: 3.7.9
-- Python packages: pandas = 1.1.3, numpy = 1.20.2, python-igraph=0.8.3, torch=1.6.0,louvain=0.7.0, scipy = 1.5.2, scanpy = 1.6.0, anndata = 0.7.4, natsort = 7.0.1, sklearn = 0.23.3
-
-Environment 3:
-- System: Anaconda
-- Python: 3.8.8
-- Python packages: pandas = 1.2.4, numpy = 1.19.1, python-igraph=0.9.1, torch=1.8.1, louvain=0.7.0, scipy = 1.6.3, scanpy = 1.7.2, anndata = 0.7.6, natsort = 7.1.1, sklearn = 0.24.2
+- System: Anaconda (23.9.0)
+- Python: 3.11.5
+- Python packages: pandas = 2.0.3, numpy = 1.24.3, numba = 0.57.1, scipy = 1.11.1, scanpy = 1.9.8, anndata = 0.10.8, scikit-learn = 1.3.0, scikit-image = 0.20.0, matplotlib = 3.7.2, imutils = 0.5.4, opencv-python = 4.10.0.
 
 
 ## Contributing
