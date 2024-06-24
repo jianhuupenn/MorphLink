@@ -363,7 +363,7 @@ for channel in range(masks.shape[0]):
     
 ```
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_0.png" width=35% height=35%>
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_0.png" width=50% height=35%>
 
     
 ![png](output_44_0.png)
