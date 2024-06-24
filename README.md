@@ -32,6 +32,8 @@ A Jupyter Notebook of the tutorial is accessible from :
 <br>
 https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/MorphLink_tutorial.ipynb
 <br>
+Please install Jupyter in order to open this notebook.
+<br>
 <br>
 Toy data and results can be downloaded at: 
 <br>
@@ -39,8 +41,9 @@ https://drive.google.com/drive/folders/1NgJICg1jFD2HP7WGZ9vXk7GrRJRoFfSD?usp=sha
 <br>
 https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/results
 <br>
+https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures
 <br>
-Please install Jupyter in order to open this notebook.
+<br>
 
 ## System Requirements
 Python support packages: igraph, torch, pandas, numpy, scipy, scanpy > 1.5, anndata, louvain, sklearn.
