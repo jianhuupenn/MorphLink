@@ -27,14 +27,18 @@ For the step-by-step tutorial, please refer to:
 <br>
 https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/MorphLink_tutorial.md
 <br>
+<br>
 A Jupyter Notebook of the tutorial is accessible from : 
 <br>
 https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/MorphLink_tutorial.ipynb
 <br>
+<br>
 Toy data and results can be downloaded at: 
 <br>
 https://drive.google.com/drive/folders/1NgJICg1jFD2HP7WGZ9vXk7GrRJRoFfSD?usp=sharing
+<br>
 https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/results
+<br>
 <br>
 Please install Jupyter in order to open this notebook.
 
