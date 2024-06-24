@@ -185,7 +185,7 @@ plt.show()
 cv2.imwrite(plot_dir+'/figures/test_patch_size.jpg', img_new)
 
 ```
-<img src="tutorial/figures/test_patch_size.jpg" width=50% height=50%>
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/test_patch_size.jpg" width=50% height=50%>
 
 
 #### 4.2 Patch split
