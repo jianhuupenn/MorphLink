@@ -597,7 +597,7 @@ plt.close()
     [0.13, 0.63, 0.15, 0.576, 0.162, 0.816, 0.176, 1.047, 0.196, 0.901]
 
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/scatter_plot_xy.png" width=55% height=55%>    
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/scatter_plot_xy.png" width=50% height=50%>    
 
 
 ### 7. Select samples for visual demonstration
