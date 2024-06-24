@@ -185,7 +185,7 @@ plt.show()
 cv2.imwrite(plot_dir+'/figures/test_patch_size.jpg', img_new)
 
 ```
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/test_patch_size.jpg" width=50% height=50%>
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/test_patch_size.jpg" width=35% height=35%>
 
 
 #### 4.2 Patch split
@@ -363,6 +363,7 @@ for channel in range(masks.shape[0]):
     
 ```
 
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_0.png" width=35% height=35%>
 
     
 ![png](output_44_0.png)
