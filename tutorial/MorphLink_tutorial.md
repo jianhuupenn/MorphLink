@@ -185,7 +185,7 @@ plt.show()
 cv2.imwrite(plot_dir+'/figures/test_patch_size.jpg', img_new)
 
 ```
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/test_patch_size.jpg" width=35% height=35%>
+<img align="cencer" src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/test_patch_size.jpg" width=35% height=35%>
 
 
 #### 4.2 Patch split
@@ -363,18 +363,12 @@ for channel in range(masks.shape[0]):
     
 ```
 
-Mask 0:
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_0.png" width=35% height=35%>
-Mask 1:
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_1.png" width=35% height=35%>
-Mask 2:
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_2.png" width=35% height=35%>
-Mask 3: 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_3.png" width=35% height=35%>
-Mask 4:
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_4.png" width=35% height=35%>
-Mask 5:
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_5.png" width=35% height=35%>
+<img align="cencer" src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_0.png" width=35% height=35%>
+<img align="cencer" src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_1.png" width=35% height=35%>
+<img align="cencer" src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_2.png" width=35% height=35%>
+<img align="cencer" src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_3.png" width=35% height=35%>
+<img align="cencer" src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_4.png" width=35% height=35%>
+<img align="cencer" src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_5.png" width=35% height=35%>
 
 
 ### 6. Link image features with gene expression
@@ -435,7 +429,7 @@ plt.close()
 
 ```
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/gene_pred.png" width=100% height=100%>
+<img align="cencer" src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/gene_pred.png" width=100% height=100%>
 
 
 ```python
@@ -467,7 +461,7 @@ plt.close()
 
 ```
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/img_pred.png" width=100% height=100%>    
+<img align="cencer" src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/img_pred.png" width=100% height=100%>    
 
 
 #### 6.3 Identify subregions
@@ -601,7 +595,7 @@ plt.close()
     [0.13, 0.63, 0.15, 0.576, 0.162, 0.816, 0.176, 1.047, 0.196, 0.901]
 
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/scatter_plot_xy.png" width=55% height=55%>    
+<img align="cencer" src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/scatter_plot_xy.png" width=55% height=55%>    
 
 
 ### 7. Select samples for visual demonstration
@@ -723,6 +717,6 @@ for i in range(len(visual_img_list)):
 
 ```
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/linkage_demonstration_c4_solidity_iqr_ncuts=5_nsamples=5.png" width=100% height=100%>
+<img align="cencer" src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/linkage_demonstration_c4_solidity_iqr_ncuts=5_nsamples=5.png" width=100% height=100%>
     
 
