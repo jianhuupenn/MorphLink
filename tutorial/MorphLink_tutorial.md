@@ -113,19 +113,6 @@ mph.__version__
     '1.0.1'
 
 
-
-
-```python
-os.getcwd()
-```
-
-
-
-
-    '/Users/jinghuang/Library/CloudStorage/Dropbox/Jian_Jing/LabelTransfer/test_package'
-
-
-
 ### 3. Read in data
 The current version of MorphLink requres two input data: 
 <br>
@@ -198,7 +185,7 @@ plt.show()
 cv2.imwrite(plot_dir+'/figures/test_patch_size.jpg', img_new)
 
 ```
-![Test patch size](tutorial/figures/test_patch_size.jpg)
+![Test patch size](figures/test_patch_size.jpg)
 
 
 #### 4.2 Patch split
