@@ -363,12 +363,11 @@ for channel in range(masks.shape[0]):
     
 ```
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_0.png" width=35% height=35%>
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_1.png" width=35% height=35%>
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_2.png" width=35% height=35%>
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_3.png" width=35% height=35%>
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_4.png" width=35% height=35%>
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_5.png" width=35% height=35%>
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_0.png" width=35% height=35%> <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_1.png" width=35% height=35%>
+
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_2.png" width=35% height=35%> <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_3.png" width=35% height=35%>
+
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_4.png" width=35% height=35%> <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_5.png" width=35% height=35%>
 
 
 ### 6. Link image features with gene expression
