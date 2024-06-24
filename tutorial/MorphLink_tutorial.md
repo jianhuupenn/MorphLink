@@ -185,7 +185,7 @@ plt.show()
 cv2.imwrite(plot_dir+'/figures/test_patch_size.jpg', img_new)
 
 ```
-![Test patch size](figures/test_patch_size.jpg)
+![Test patch size](figures/test_patch_size.jpg = 100*100)
 
 
 #### 4.2 Patch split
