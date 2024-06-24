@@ -363,13 +363,17 @@ for channel in range(masks.shape[0]):
     
 ```
 
+Mask 0:
 <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_0.png" width=35% height=35%>
+Mask 1:
 <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_1.png" width=35% height=35%>
-
+Mask 2:
 <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_2.png" width=35% height=35%>
+Mask 3: 
 <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_3.png" width=35% height=35%>
-
+Mask 4:
 <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_4.png" width=35% height=35%>
+Mask 5:
 <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_5.png" width=35% height=35%>
 
 
@@ -597,7 +601,7 @@ plt.close()
     [0.13, 0.63, 0.15, 0.576, 0.162, 0.816, 0.176, 1.047, 0.196, 0.901]
 
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/scatter_plot_xy.png" width=75% height=75%>    
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/scatter_plot_xy.png" width=55% height=55%>    
 
 
 ### 7. Select samples for visual demonstration
