@@ -25,12 +25,12 @@ With [**MorphLink**](https://github.com/jianhuupenn/MorphLink) package, you can:
 
 For the step-by-step tutorial, please refer to: 
 <br>
-https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/MorphLink_tutorial.md
+https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/tutorial.md
 <br>
 <br>
 A Jupyter Notebook of the tutorial is accessible from : 
 <br>
-https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/MorphLink_tutorial.ipynb
+https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/tutorial.ipynb
 <br>
 Please install Jupyter in order to open this notebook.
 <br>
