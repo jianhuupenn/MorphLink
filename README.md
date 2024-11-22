@@ -74,6 +74,6 @@ Last update: 06/23/2024, version 1.0.1
 
 Please consider citing the following reference:
 
-- https://www.
+- https://doi.org/10.1101/2024.08.24.609528
 
 <br>
