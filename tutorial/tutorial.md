@@ -10,7 +10,7 @@
 4. [Image segmentation](#4-image-segmentation)
 5. [Extract interpretable image features](#5-extract-interpretable-image-features)
 6. [Link image features with gene expression](#6-link-image-features-with-gene-expression)
-7. [Select samples for visual demonstration](#7-select-samples-for-visual-illustration)
+7. [Select samples for visual demonstration](#7-select-samples-for-visual-demonstration)
 8. [Parameter descriptions](#8-parameter-descriptions)
 
 ### 1. Installation
