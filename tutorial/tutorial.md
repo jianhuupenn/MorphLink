@@ -4,7 +4,7 @@
 <center>Author: Jing Huang, Chenyang Yuan, Jiahui Jiang, Jianfeng Chen, Sunil S. Badve, Yesim Gokmen-Polar, Rossana L. Segura, Xinmiao Yan, Alexander Lazar, Jianjun Gao, Michael Epstein, Linghua Wang* and Jian Hu*
 
 ### Outline
-1. [Installation](#1-installation)
+1. [Installation](#installation)
 2. Import modules
 3. Read in data
 4. Image segmentation
