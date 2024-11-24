@@ -1,7 +1,7 @@
 <h1><center>MorphLink Tutorial</center></h1>
 
 
-<center>Author: Jing Huang, Chenyang Yuan, Jiahui Jiang, Jianfeng Chen, Sunil S. Badve, Yesim Gokmen-Polar, Rossana L. Segura, Xinmiao Yan, Alexander Lazar, Jianjun Gao, Michael Epstein, Linghua Wang* and Jian Hu*
+<center>Author: Jing Huang, Chenyang Yuan, Jiahui Jiang, Jianfeng Chen, Sunil S. Badve, Yesim Gokmen-Polar, Rossana L. Segura, Xinmiao Yan, Alexander Lazar, Jianjun Gao, Bing Yao, Michael Epstein, Linghua Wang* and Jian Hu*
 
 ### Outline
 1. [Installation](#1-installation)
@@ -11,7 +11,7 @@
 5. [Extract interpretable image features](#5-extract-interpretable-image-features)
 6. [Link image features with gene expression](#6-link-image-features-with-gene-expression)
 7. [Select samples for visual demonstration](#7-select-samples-for-visual-demonstration)
-8. [Parameter descriptions](#8-parameter-descriptions)
+8. [Parameter settings](#8-parameter-settings)
 
 ### 1. Installation
 To install MorphLink package you must make sure that your python version is over 3.5. If you don’t know the version of python you can check it by:
@@ -723,6 +723,18 @@ for i in range(len(visual_img_list)):
 <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/linkage_demonstration_c4_solidity_iqr_ncuts=5_nsamples=5.png" width=100% height=100%>
 
 
-### 8. Parameter descriptions
+### 8. Parameter settings
+Patch segmentation: $k$, $t$, $\alpha$.
+- $k$: the number of initial clusters (default value is 10 and recommend using the default).
+- $t$: the threshold used to control the integrity of clusters for spatial smoothing (default value is 4 and recommend using the default).
+- $\alpha$: the threshold used to control color distances in cluster merging (default value is 30, and it can be set to 20 for thinner structures).
 
+Mask matching: $\alpha$.
+- $\alpha$: same as above.
+
+Subregion devision: $\beta$.
+- $\beta$: Jaccard index to evaluate the overlapping between cluster pairs (default value is 0.2 and recommend using the default).
+
+Calculating marginal curves: $l$.
+- $l$: the parameter of window size used to control the number of intervals within a subregion (default value is 100, and it can be set to 50 for capturing coarse marginal patterns).
 
