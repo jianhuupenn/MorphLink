@@ -9,7 +9,7 @@ MorphLink is a computational framework to systematically extract and link interp
 
 ![MorphLink workflow](docs/asserts/images/workflow.jpg)
 <br>
-For thorough details, see the preprint: [Biorxiv](https://www.biorxiv.org/)
+For thorough details, see the preprint: [Biorxiv](https://www.biorxiv.org/content/10.1101/2024.08.24.609528v1)
 <br>
 
 ## Usage
@@ -66,7 +66,7 @@ Souce code: [Github](https://github.com/jianhuupenn/MorphLink)
 
 We are continuing adding new features. Bug reports or feature requests are welcome. 
 
-Last update: 06/23/2024, version 1.0.1
+Last update: 11/24/2024, version 1.0.2
 
 
 
