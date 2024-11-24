@@ -724,17 +724,17 @@ for i in range(len(visual_img_list)):
 
 
 ### 8. Parameter settings
-Patch segmentation: $k$, $t$, $\alpha$.
+**Patch segmentation:** $k$, $t$, $\alpha$.
 - $k$: the number of initial clusters (default value is 10 and recommend using the default).
 - $t$: the threshold used to control the integrity of clusters for spatial smoothing (default value is 4 and recommend using the default).
 - $\alpha$: the threshold used to control color distances in cluster merging (default value is 30, and it can be set to 20 for thinner structures).
 
-Mask matching: $\alpha$.
+**Mask matching:** $\alpha$.
 - $\alpha$: same as above.
 
-Subregion devision: $\beta$.
+**Subregion devision:** $\beta$.
 - $\beta$: Jaccard index to evaluate the overlapping between cluster pairs (default value is 0.2 and recommend using the default).
 
-Calculating marginal curves: $l$.
+**Calculating marginal curves:** $l$.
 - $l$: the parameter of window size used to control the number of intervals within a subregion (default value is 100, and it can be set to 50 for capturing coarse marginal patterns).
 
