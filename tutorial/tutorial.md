@@ -4,13 +4,14 @@
 <center>Author: Jing Huang, Chenyang Yuan, Jiahui Jiang, Jianfeng Chen, Sunil S. Badve, Yesim Gokmen-Polar, Rossana L. Segura, Xinmiao Yan, Alexander Lazar, Jianjun Gao, Michael Epstein, Linghua Wang* and Jian Hu*
 
 ### Outline
-1. [Installation](#installation)
-2. Import modules
-3. Read in data
-4. Image segmentation
-5. Extract interpretable image features
-6. Link image features with gene expression
-7. Select samples for visual demonstration
+1. [Installation](#1-installation)
+2. [Import modules](#2-import-python-modules)
+3. [Read in data](#3-read-in-data)
+4. [Image segmentation](#4-image-segmentation)
+5. [Extract interpretable image features](#5-extract-interpretable-image-features)
+6. [Link image features with gene expression](#6-link-image-features-with-gene-expression)
+7. [Select samples for visual demonstration](#7-select-samples-for-visual-illustration)
+8. [Parameter descriptions](#8-parameter-descriptions)
 
 ### 1. Installation
 To install MorphLink package you must make sure that your python version is over 3.5. If you don’t know the version of python you can check it by:
@@ -720,5 +721,8 @@ for i in range(len(visual_img_list)):
 ```
 
 <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/linkage_demonstration_c4_solidity_iqr_ncuts=5_nsamples=5.png" width=100% height=100%>
-    
+
+
+### 8. Parameter descriptions
+
 
