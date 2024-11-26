@@ -223,7 +223,7 @@ patch_info=pd.read_csv(plot_dir+"/results/patch_info.csv", header=0, index_col=0
 # Perform a K-Means clustering to divide the pixels of each image patch into clusters 
 # then employ a convolution layer to refine the cluster assignment
 mph.step4_Segmentation(plot_dir=plot_dir, n_clusters=10, refine=True, refine_threshold=4) # take around 2h
-check_dic_list(plot_dir)
+nph.check_dic_list(plot_dir)
 
 ```
 
