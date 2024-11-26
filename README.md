@@ -1,4 +1,4 @@
-# MorphLink  v1.0.3
+# MorphLink  v1.0.4
 
 ## MorphLink: Bridging Cell Morphological Behaviors and Molecular Dynamics in Multi-modal Spatial Omics
 
@@ -66,7 +66,7 @@ Souce code: [Github](https://github.com/jianhuupenn/MorphLink)
 
 We are continuing adding new features. Bug reports or feature requests are welcome. 
 
-Last update: 11/26/2024, version 1.0.3
+Last update: 11/26/2024, version 1.0.4
 
 
 
