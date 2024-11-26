@@ -76,12 +76,14 @@ import pandas as pd
 import math
 import random
 import numba
+import leidenalg
 import anndata as ad
 from anndata import AnnData,read_csv,read_text,read_mtx
 import scipy
 from scipy import stats
 from scipy import ndimage
 from scipy.sparse import issparse
+from scipy.stats import gaussian_kde
 import scanpy as sc
 # import SpaGCN as spg
 import MorphLink as mph
@@ -94,8 +96,8 @@ from skimage.feature import graycomatrix, graycoprops, peak_local_max
 from skimage.segmentation import watershed
 import matplotlib.colors as clr
 import matplotlib.pyplot as plt
+import seaborn as sns
 import imutils
-import slideio
 import cv2
 os.environ["OPENCV_IO_MAX_IMAGE_PIXELS"] = str(pow(2,40)) # os system settings
 import warnings
@@ -111,10 +113,26 @@ mph.__version__
 
 
 
-    '1.0.1'
+    '1.0.4'
 
 
 ### 3. Read in data
+Data notes:
+<br>
+- Toydata are made available at the [shared folder](https://drive.google.com/drive/folders/1NgJICg1jFD2HP7WGZ9vXk7GrRJRoFfSD?usp=sharing).
+<br>
+- We have also provided with pre-generated image features in the [results folder](https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/results) to allow users to directly explore the linkage between generated image features and interested genes set, as detailed in [6. Link image features with gene expression](#6-link-image-features-with-gene-expression) and [7. Select samples for visual demonstration](#7-select-samples-for-visual-demonstration).
+<br>
+	For pre-generated image features:
+<br>
+	- mask_features_all_logged.h5ad: mask-level image features;
+<br>
+	- cc_features_all_logges.h5ad: object-level image features;
+<br>
+	- all_features_logged.h5ad: final generated image features combining both mask-level image features and object-level image features.
+<br>
+- The intermediate results are saved in the [figures folder](https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures).
+
 The current version of MorphLink requres two input data: 
 <br>
 1. The gene expression matrix (N $\times$ G): expression_matrix.h5ad;
@@ -334,13 +352,6 @@ ret=mph.mask_properity(masks, img, patch_info, d0, d1, center=True)
 print(ret) 
 
 ```
-
-    Combining mask  0
-    Combining mask  1
-    Combining mask  2
-    Combining mask  3
-    Combining mask  4
-    Combining mask  5
        per_contain  per_area           avg_rgb
     0        1.000     0.374  [156.  52.  90.]
     1        1.000     0.345  [186.  71. 110.]
@@ -372,6 +383,42 @@ for channel in range(masks.shape[0]):
 
 **Mask 4 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mask 5:<br>**
 <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_4.png" width=35% height=35%> <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_5.png" width=35% height=35%>
+
+#### 5.4 Find major masks
+
+
+```python
+# Calculate the area proportion of each mask
+mask_area_prop={}
+for i in range(masks.shape[0]):
+    tmp_prop=[]
+    for j in range(masks.shape[1]):
+        tmp_prop.append(np.round(np.sum(masks[i, j, ...])/(patch_size*patch_size),3))
+    print("Mask ", i)
+    mask_area_prop["Mask_"+str(i)]=tmp_prop
+
+```
+
+``` python
+# Generate box-plots to check mask area proportions
+dat_bxplt=pd.DataFrame({
+    "Value": [value for values in mask_area_prop.values() for value in values],
+    "Group": [group for group, values in mask_area_prop.items() for _ in values]})
+
+sns.boxplot(x="Group", y="Value", data=dat_bxplt, palette="Blues")
+plt.title("Area proportion of each mask within patches", fontsize=16)
+plt.xlabel("Group", fontsize=14)
+plt.ylabel("Value", fontsize=14)
+plt.savefig(plot_dir+"/figures/mask_area_proportion_boxplot.png", dpi=300)
+plt.show()
+plt.close()
+plt.clf()
+
+```
+
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/mask_area_proportion_boxplot.png" width=65% height=65%>
+
+From the box-plots, we can find that Mask 0 and Mask 1 capture the most dominant tissue structures.
 
 
 ### 6. Link image features with gene expression
