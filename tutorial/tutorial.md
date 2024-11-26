@@ -120,7 +120,7 @@ mph.__version__
 Data notes:
 - Toydata are made available at the [shared folder](https://drive.google.com/drive/folders/1NgJICg1jFD2HP7WGZ9vXk7GrRJRoFfSD?usp=sharing).
 - We have also provided with pre-generated image features in the [results folder](https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/results) to allow users to directly explore the linkage between generated image features and interested genes set, as detailed in [6. Link image features with gene expression](#6-link-image-features-with-gene-expression) and [7. Select samples for visual demonstration](#7-select-samples-for-visual-demonstration).
-	For pre-generated image features:
+Specifically, for pre-generated image features:
 	- mask_features_all_logged.h5ad: mask-level image features;
 	- cc_features_all_logges.h5ad: object-level image features;
 	- all_features_logged.h5ad: final generated image features combining both mask-level image features and object-level image features.
