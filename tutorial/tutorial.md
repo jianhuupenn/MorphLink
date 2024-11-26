@@ -118,19 +118,12 @@ mph.__version__
 
 ### 3. Read in data
 Data notes:
-<br>
 - Toydata are made available at the [shared folder](https://drive.google.com/drive/folders/1NgJICg1jFD2HP7WGZ9vXk7GrRJRoFfSD?usp=sharing).
-<br>
 - We have also provided with pre-generated image features in the [results folder](https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/results) to allow users to directly explore the linkage between generated image features and interested genes set, as detailed in [6. Link image features with gene expression](#6-link-image-features-with-gene-expression) and [7. Select samples for visual demonstration](#7-select-samples-for-visual-demonstration).
-<br>
 	For pre-generated image features:
-<br>
 	- mask_features_all_logged.h5ad: mask-level image features;
-<br>
 	- cc_features_all_logges.h5ad: object-level image features;
-<br>
 	- all_features_logged.h5ad: final generated image features combining both mask-level image features and object-level image features.
-<br>
 - The intermediate results are saved in the [figures folder](https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures).
 
 The current version of MorphLink requres two input data: 
