@@ -1,0 +1,13 @@
+numpy
+pandas
+numba
+anndata
+scipy
+scanpy
+scikit-learn
+scikit-image
+matplotlib
+slideio
+imutils
+opencv-python
+leidenalg
