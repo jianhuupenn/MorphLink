@@ -234,7 +234,7 @@ patch_info=pd.read_csv(plot_dir+"/results/patch_info.csv", header=0, index_col=0
 # Perform a K-Means clustering to divide the pixels of each image patch into clusters 
 # then employ a convolution layer to refine the cluster assignment
 mph.step4_Segmentation(plot_dir=plot_dir, n_clusters=10, refine=True, refine_threshold=4) # take around 2h
-nph.check_dic_list(plot_dir)
+mph.check_dic_list(plot_dir)
 
 ```
 
@@ -409,12 +409,13 @@ plt.clf()
 
 ```
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/mask_area_proportion_boxplot.png" width=65% height=65%>
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/mask_area_proportion_boxplot.png" width=50% height=50%>
 
 From the box-plots, we can find that Mask 0 and Mask 1 capture the most dominant tissue structures.
 
 
 ### 6. Link image features with gene expression
+- If users prefer to skip the image extraction and directly proceed with linkage analysis, the pre-generated image features are made available in the [results folder](https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/results).
 
 #### 6.1 Preprocessing
 
@@ -443,7 +444,9 @@ Apart from louvain clustering, other spatial clustering methods (e.g., SpaGCN) c
 # Set colors
 cnt_color = clr.LinearSegmentedColormap.from_list('pink_green', ['#3AB370',"#EAE7CC","#FD1593"], N=256)
 cat_color=["#F56867","#FEB915","#C798EE","#59BE86","#7495D3","#D1D1D1","#6D1A9C","#15821E","#3A84E6","#997273","#787878","#DB4C6C","#9E7A7A","#554236","#AF5F3C","#93796C","#F9BD3F","#DAB370","#877F6C","#268785"]
+```
 
+```python
 # Gene expression
 # Louvain clustering
 pca = PCA(n_components=50)
@@ -451,12 +454,14 @@ pca.fit(gene_adata.X)
 embed=pca.transform(gene_adata.X)
 tmp=sc.AnnData(embed)
 sc.pp.neighbors(tmp, n_neighbors=10)
-sc.tl.louvain(tmp,resolution=0.05)
-y_pred=tmp.obs['louvain'].astype(int).to_numpy()
+sc.tl.leiden(tmp,resolution=0.1)
+y_pred=tmp.obs['leiden'].astype(int).to_numpy()
 gene_adata.obs["gene_pred"]=y_pred
 # or by SpaGCN
 gene_adata.obs["gene_pred"]=gene_adata.obs["spagcn_pred"].astype('category') # use the spatial clustering results from SpaGCN
+```
 
+```python
 # check spatial clustering of gene expression
 domains="gene_pred"
 num_domains=len(gene_adata.obs[domains].unique())
@@ -464,15 +469,16 @@ gene_adata.uns[domains+"_colors"]=list(cat_color[:num_domains])
 ax=sc.pl.scatter(gene_adata,alpha=1,x="pixel_y",y="pixel_x",color=domains,title=domains,color_map=cat_color,show=False,size=150000/gene_adata.shape[0])
 ax.set_aspect('equal', 'box')
 ax.axes.invert_yaxis()
-plt.savefig(plot_dir+"/figures/gene_pred.png", dpi=600)
+plt.savefig(plot_dir+"/figures/gene_pred.png", dpi=300)
 plt.show()
 plt.close()
+plt.clf()
 # ax=spg.plot_spatial_domains_ez_mode(gene_adata, domain_name="gene_pred", x_name="pixel_y", y_name="pixel_x", plot_color=cat_color, size=150000/gene_adata.shape[0], 
 	# show=False, save=True,save_dir=plot_dir+"/figures/gene_pred.png")
 
 ```
 
-<img align="cencer" src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/gene_pred.png" width=100% height=100%>
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/gene_pred.png" width=75% height=75%>
 
 
 ```python
@@ -483,12 +489,14 @@ pca.fit(img_adata.X)
 embed=pca.transform(img_adata.X)
 tmp=sc.AnnData(embed)
 sc.pp.neighbors(tmp, n_neighbors=10)
-sc.tl.louvain(tmp,resolution=0.05)
-y_pred=tmp.obs['louvain'].astype(int).to_numpy()
+sc.tl.leiden(tmp,resolution=0.05)
+y_pred=tmp.obs['leiden'].astype(int).to_numpy()
 len(np.unique(y_pred)) # number of louvain clusters for image features
 img_adata.obs["img_pred"]=y_pred
 img_adata.obs["img_pred"]=img_adata.obs["img_pred"].astype('category')
+```
 
+```python
 # check spatial clustering of image features
 domains="img_pred"
 num_domains=len(img_adata.obs[domains].unique())
@@ -496,15 +504,16 @@ img_adata.uns[domains+"_colors"]=list(cat_color[:num_domains])
 ax=sc.pl.scatter(img_adata,alpha=1,x="pixel_y",y="pixel_x",color=domains,title=domains,color_map=cat_color,show=False,size=150000/img_adata.shape[0])
 ax.set_aspect('equal', 'box')
 ax.axes.invert_yaxis()
-plt.savefig(plot_dir+"/figures/img_pred.png", dpi=600)
+plt.savefig(plot_dir+"/figures/img_pred.png", dpi=300)
 plt.show()
 plt.close()
+plt.clf()
 # ax=spg.plot_spatial_domains_ez_mode(img_adata, domain_name="img_pred", x_name="pixel_y", y_name="pixel_x", plot_color=cat_color,size=180000/img_adata.shape[0], 
 	# show=False, save=True,save_dir=plot_dir+"/figures/img_pred.png")
 
 ```
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/img_pred.png" width=100% height=100%>    
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/img_pred.png" width=75% height=75%>    
 
 
 #### 6.3 Identify subregions
@@ -516,12 +525,28 @@ gene_clusters=gene_adata.obs["gene_pred"].tolist()
 img_clusters=img_adata.obs["img_pred"].tolist()
 
 # for any cluster pair if the overlapping spots / overall spots > max_threshod (default value is 0.2) then merge the two clusters
-gene_adata.obs["combined_pred"]=mph.combine_clusters(gene_clusters, img_clusters, min_threshold=1/5, max_threshold=1/2)
+gene_adata.obs["gene_img_pred"]=mph.combine_clusters(gene_clusters, img_clusters, min_threshold=1/5, max_threshold=1/2)
 gene_adata.obs["combined_pred"]=gene_adata.obs["combined_pred"].astype('category')
 # ax=spg.plot_spatial_domains_ez_mode(gene_adata, domain_name="combined_pred", x_name="pixel_y", y_name="pixel_x", plot_color=cat_color,size=150000/gene_adata.shape[0], 
 	# show=False, save=True,save_dir=plot_dir+"/figures/combined.png")
 
 ```
+
+```python
+# Plot subregion
+domains="combined_pred"
+num_domains=len(gene_adata.obs[domains].unique())
+gene_adata.uns[domains+"_colors"]=list(cat_color[:num_domains])
+ax=sc.pl.scatter(gene_adata,alpha=1,x="pixel_y",y="pixel_x",color=domains,title=domains,color_map=cat_color,show=False,size=150000/img_adata.shape[0])
+ax.set_aspect('equal', 'box')
+ax.axes.invert_yaxis()
+plt.savefig(plot_dir+"/figures/combined_pred.png", dpi=300)
+plt.show()
+plt.close()
+plt.clf()
+
+```
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/img_pred.png" width=75% height=75%>
 
 #### 6.4 Quantify the curve-based similarity
 
@@ -532,113 +557,61 @@ gene_adata.obs["combined_pred"]=gene_adata.obs["combined_pred"].astype('category
 
 
 ```python
-# Specify a set of interested genes (or from DE analysis)
-genes=["B2M", "CD74", "TAP1", "MKI67", "MYCL", "TUBB", "MS4A1", "IGHM"]
-gene_adata_sub=gene_adata[:,gene_adata.var.index.isin(genes)].copy()
+# Specify a set of genes (or from DE analysis) that are related to the interested biological process
+# e.g., a set of genes related to antigen presentation
+genes_set=['HLA-F', 'HHLA3', 'HLA-DR', 'CD1D', 'IFNG', 'LMP7', 'VCAM1', 'RFXANK', 'ERAP2', 'CD274', 'PDCD1', 'LMP2', 'TAPBPL', 'HLA-DQ', 'HLA-DP', 'ERAP1', 'HLA-DMA', 'CD40', 'IDO1', 'IFI16', 'HLA-E', 'HLA-DMB', 'RFX5', 'AP1M1', 'TAP2', 'TAP1', 'HHLA2', 'LMP10', 'CD80', 'PSMB8', 'CALR', 'CD74', 'HHLA1', 'RFXAP', 'CD86', 'CD70', 'CIITA', 'CTLA4', 'TAPBP', 'PSMB10', 'MR1', 'PSMB9', 'NLRC5', 'HLA-G', 'ICOS', 'CD40LG', 'SEC61', 'IRF1', 'CD276', 'ICAM1', 'B2M']
+filtered_genes_set=list(set(genes_set) & set(gene_adata.var.index.tolist()))
 
-# Specify the mask channel 
-channel = 4
-features=[i for i in img_adata.var.index if "m"+str(channel) in i]+[i for i in img_adata.var.index if "c"+str(channel) in i]
-img_adata_sub=img_adata[:,img_adata.var.index.isin(features)].copy()
-
-# Normalize gene expression and image features to the value range of [0,1]
-# gene expression
-gene_df=gene_adata_sub.X.A if issparse(gene_adata_sub.X) else gene_adata_sub.X
-gene_df=np.array(gene_df)
-gene_df=(gene_df-np.min(gene_df, 0))/(np.max(gene_df, 0)-np.min(gene_df, 0))
-# image features
-img_df=img_adata_sub.X.A if issparse(img_adata_sub.X) else img_adata_sub.X
-img_df=np.array(img_df)
-img_df=(img_df-np.min(img_df, 0))/(np.max(img_df, 0)-np.min(img_df, 0))
-
-# spatial coordinates of spots
-x = gene_adata_sub.obs["pixel_x"].values
-y = gene_adata_sub.obs["pixel_y"].values
-
-# Measure the regional pattern similarity
-clusters=[0]*len(x)
-cor=mph.pattern_similarity(gene_df, img_df, clusters, x, y, num_interval=20, method="mean", metric="cor", integrate_xy="weighted",pool="min", rescale=True, add_noise=True, two_side=False, min_spots=5)
-diff=mph.pattern_similarity(gene_df, img_df, clusters, x, y, num_interval=20, method="mean", metric="diff", integrate_xy="weighted",pool="max", rescale=True, add_noise=True, two_side=False, min_spots=5)
-cor=pd.DataFrame(cor, index=gene_adata_sub.var.index, columns=img_adata_sub.var.index)
-diff=pd.DataFrame(diff, index=gene_adata_sub.var.index, columns=img_adata_sub.var.index)
-# assign weights to correlation (default value is 0.5)
-w_cor=1/2
-CPSI=w_cor*cor+(1-w_cor)*(1-diff)
-
-# take gene CD74 as an example
-# identify 10 image features that share the highest regional pattern similarity with the specified gene
-g="CD74" # from the list of genes
-CPSI.loc[g, :].nlargest(10)
+# Calculate the spatial similarity between generated image features and selected genes set by CPSI
+channel=4 # specify the target mask channel
+CPSI=mph.cpsi_eva(gene_adata, img_adata, filtered_genes_set, channel)
 
 ```
-
-
-
-
-    c4_solidity_iqr            0.725101
-    log_c4_solidity_std        0.698598
-    log_c4_dis_iqr             0.443087
-    log_c4_extent_iqr          0.428348
-    log_c4_extent_std          0.408181
-    log_c4_dis_std             0.405402
-    log_c4_extent_q0           0.402305
-    log_c4_extent_q100         0.396058
-    c4_eccentricity_q0         0.394627
-    log_m4_Dist_Trans_1_std    0.384034
-    Name: CD74, dtype: float64
-
 
 
 #### 6.5 Generate marginal curves
 
 
 ```python
-# for a pair of gene expression feature and image feature
+# e.g., gene CD74
 g="CD74"
-f=CPSI.loc[g, :].nlargest(1).index.tolist()[0] # select the image feature with the highest regional pattern similarity
-print(f)
 
-# Gradient changes along x-axis and y-axis
+# Identify the image feature that has the highest CPSI with the target gene and generate a gradient marginal curve along x-axis and y-axis for the target pair of gene expression and image feature
 range_step=1/4
 num_cuts=5
+f, x, y, _=mph.marginal_curve(gene_adata, img_adata, CPSI, g, range_step, num_cuts)
 
-img_adata_sub.obs[g]=np.array(gene_adata_sub.X)[:, gene_adata_sub.var.index==g]
-img_adata_sub.obs[f]=np.array(img_adata_sub.X)[:, img_adata_sub.var.index==f]
-x, y, z=[], [], []
-for i in range(num_cuts):
-	mx=np.quantile(img_adata_sub.obs[f], i/num_cuts+1/num_cuts*(1-range_step))
-	mi=np.quantile(img_adata_sub.obs[f], i/num_cuts+1/num_cuts*range_step)
-	sub_tmp=img_adata_sub[(img_adata_sub.obs[f]>=mi)&(img_adata_sub.obs[f]<=mx),:]
-	median_f=np.median(sub_tmp.obs[f])
-	samples=sub_tmp.obs.index[(sub_tmp.obs[f]>=mi) & (sub_tmp.obs[f]<=mx)].tolist()
-	x.append(np.round(np.mean(sub_tmp.obs[f]), 3))
-	y.append(np.round(np.mean(sub_tmp.obs[g]), 3))
-	z.append(np.round(np.mean(sub_tmp.obs[f]), 3))
-	z.append(np.round(np.mean(sub_tmp.obs[g]), 3))
+```
+The identified image feature having the highest CPSI with the target gene CD74: c4_solidity_iqr
 
-print(g)
-print(x)
-print(y)
-print(z)
 
-# generate a scatter plot for x and y
-plt.scatter(x, y)
-plt.xlabel("gene expression levels")
-plt.ylabel("image feature levels")
-plt.title("The regional linkage between "+g+" and "+f)
+```python
+# Generate a scatter plot for x and y
+plt.scatter(x, y, s=80, c='blue', alpha=0.75)
+plt.xlabel("gene expression levels", fontsize=14)
+plt.ylabel("image feature levels", fontsize=14)
+plt.title("The regional linkage between "+g+" and "+f, fontsize=16)
+plt.grid(True, linestyle='--', alpha=0.6)
 plt.show()
 plt.close()
+plt.clf()
 
 ```
 
-    c4_solidity_iqr
-    CD74
-    [0.13, 0.15, 0.162, 0.176, 0.196]
-    [0.63, 0.576, 0.816, 1.047, 0.901]
-    [0.13, 0.63, 0.15, 0.576, 0.162, 0.816, 0.176, 1.047, 0.196, 0.901]
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/scatterplot_CD74_c4_solidity_iqr.png" width=50% height=50%>    
 
+#### 6.5 Generate marginal curves
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/scatter_plot_xy.png" width=50% height=50%>    
+```python
+# perform a two-sample one-sided t-test
+target_f_scores=CPSI.loc[:,f].values.flatten()
+other_f_scores=CPSI.loc[:,CPSI.columns!=f].values.flatten()
+scipy.stats.ttest_ind(target_f_scores, other_f_scores,alternative="greater")
+
+```
+TtestResult(statistic=13.484389257247123, pvalue=5.849801060163686e-41, df=4520.0)
+
+p-value is smaller than 0.05, indicating that the selected image feature has significantly higher CPSIs with the target set of genes compared to other image features.
 
 
 ### 7. Select samples for visual demonstration
