@@ -66,7 +66,7 @@ Souce code: [Github](https://github.com/jianhuupenn/MorphLink)
 
 We are continuing adding new features. Bug reports or feature requests are welcome. 
 
-Last update: 11/24/2024, version 1.0.2
+Last update: 11/26/2024, version 1.0.3
 
 
 
