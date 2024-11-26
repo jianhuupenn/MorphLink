@@ -12,3 +12,4 @@ from .refine_and_merge_util import *
 from .tissue_patch_util import *
 from .tissue_seg_util import *
 from .util import *
+from .tutorial_util import *
