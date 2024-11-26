@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="MorphLink", 
-    version="1.0.1",
+    version="1.0.2",
     author="Jing Huang",
     author_email="jing.huang@emory.edu",
     description="MorphLink: Bridging Cell Morphological Behaviors and Molecular Dynamics in Multi-modal Spatial Omics",
