@@ -511,7 +511,7 @@ plt.clf()
 
 ```
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/combined_pred.png" width=75% height=75%>    
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/img_pred.png" width=75% height=75%>    
 
 
 #### 6.3 Identify subregions
@@ -544,7 +544,7 @@ plt.close()
 plt.clf()
 
 ```
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/img_pred.png" width=75% height=75%>
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/combined_pred.png" width=75% height=75%>
 
 #### 6.4 Quantify the curve-based similarity
 
