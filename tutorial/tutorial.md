@@ -195,7 +195,7 @@ plt.show()
 cv2.imwrite(plot_dir+'/figures/test_patch_size.jpg', img_new)
 
 ```
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/test_patch_size.jpg" width=35% height=35%>
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/test_patch_size.jpg" width=30% height=30%>
 
 
 #### 4.2 Patch split
@@ -343,6 +343,8 @@ ret=mph.mask_properity(masks, img, patch_info, d0, d1, center=True)
 print(ret) 
 
 ```
+
+
        per_contain  per_area           avg_rgb
     0        1.000     0.374  [156.  52.  90.]
     1        1.000     0.345  [186.  71. 110.]
@@ -366,13 +368,13 @@ for channel in range(masks.shape[0]):
     
 ```
 
-**Mask 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mask 1:<br>**
+**Mask 0 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mask 1:<br>**
 <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_0.png" width=25% height=25%> <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_1.png" width=25% height=25%>
 
-**Mask 2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mask 3:<br>**
+**Mask 2 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mask 3:<br>**
 <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_2.png" width=25% height=25%> <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_3.png" width=25% height=25%>
 
-**Mask 4 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mask 5:<br>**
+**Mask 4 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Mask 5:<br>**
 <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_4.png" width=25% height=25%> <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/sample_for_mask_5.png" width=25% height=25%>
 
 #### 5.4 Find major masks
@@ -435,7 +437,9 @@ img_adata=img_adata[:, np.sum(img_adata.X!=np.median(img_adata.X, 0), 0)>(img_ad
 
 #### 6.2 Spatial clustering on gene expression and image features separately
 
-Apart from louvain clustering, other spatial clustering methods (e.g., SpaGCN) can also be employed
+- To note, **subregion partitioning is optional when pathologists annotations are available**, as region separation by pathologists tends to be more biologically significant and clinically relevant.
+- Here, we perform spatial clustering on gene expression and image features separately to identify subregions where two modalities share spatial pattern similarity.
+- Apart from louvain clustering, other spatial clustering methods (e.g., SpaGCN) can also be employed
 
 
 ```python
@@ -446,7 +450,7 @@ cat_color=["#F56867","#FEB915","#C798EE","#59BE86","#7495D3","#D1D1D1","#6D1A9C"
 
 ```python
 # Gene expression
-# Louvain clustering
+# Louvain clustering (optional step if pathologists annotations are available)
 pca = PCA(n_components=50)
 pca.fit(gene_adata.X)
 embed=pca.transform(gene_adata.X)
@@ -476,12 +480,12 @@ plt.clf()
 
 ```
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/gene_pred.png" width=75% height=75%>
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/gene_pred.png" width=70% height=70%>
 
 
 ```python
 # Image features
-# Louvain clustering
+# Louvain clustering (optional step if pathologists annotations are available)
 pca = PCA(n_components=50)
 pca.fit(img_adata.X)
 embed=pca.transform(img_adata.X)
@@ -511,7 +515,7 @@ plt.clf()
 
 ```
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/img_pred.png" width=75% height=75%>    
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/img_pred.png" width=70% height=70%>    
 
 
 #### 6.3 Identify subregions
@@ -544,7 +548,7 @@ plt.close()
 plt.clf()
 
 ```
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/combined_pred.png" width=75% height=75%>
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/combined_pred.png" width=70% height=70%>
 
 #### 6.4 Quantify the curve-based similarity
 
@@ -596,7 +600,7 @@ plt.clf()
 
 ```
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/scatterplot_CD74_c4_solidity_iqr.png" width=50% height=50%>    
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/scatterplot_CD74_c4_solidity_iqr.png" width=45% height=45%>    
 
 #### 6.6 Statistical test to evaluate the confidence of the selected image feature
 
@@ -607,9 +611,14 @@ other_f_scores=CPSI.loc[:,CPSI.columns!=f].values.flatten()
 scipy.stats.ttest_ind(target_f_scores, other_f_scores,alternative="greater")
 
 ```
+
+
+```
 TtestResult(statistic=13.484389257247123, pvalue=5.849801060163686e-41, df=4520.0)
+```
 
 p-value is smaller than 0.05, indicating that the selected image feature has significantly higher CPSIs with the target set of genes compared to other image features.
+
 
 ```python
 # Generate a histogram to check CPSIs distribution
@@ -630,7 +639,7 @@ plt.clf()
 
 ```
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/CPSIs_distribution.png" width=65% height=65%>
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/CPSIs_distribution.png" width=55% height=55%>
 
 
 ### 7. Select samples for visual demonstration
