@@ -535,20 +535,35 @@ gene_adata.obs["combined_pred"]=gene_adata.obs["combined_pred"].astype('category
 ```
 
 ```python
-# Plot subregion
-domains="combined_pred"
-num_domains=len(gene_adata.obs[domains].unique())
-gene_adata.uns[domains+"_colors"]=list(cat_color[:num_domains])
-ax=sc.pl.scatter(gene_adata,alpha=1,x="pixel_y",y="pixel_x",color=domains,title=domains,color_map=cat_color,show=False,size=150000/img_adata.shape[0])
-ax.set_aspect('equal', 'box')
-ax.axes.invert_yaxis()
-plt.savefig(plot_dir+"/figures/combined_pred.png", dpi=300)
-plt.show()
-plt.close()
-plt.clf()
+gene_adata.obs["combined_pred"].value_counts(normalize=True)
 
 ```
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/combined_pred.png" width=70% height=70%>
+
+```
+combined_pred
+0.0    0.998496
+2.0    0.001504
+Name: proportion, dtype: float64
+```
+
+Since over 99% spots belong to one single cluster, no subregion division is needed in this toy dataset.
+
+
+```python
+# Plot subregion
+# domains="combined_pred"
+# num_domains=len(gene_adata.obs[domains].unique())
+# gene_adata.uns[domains+"_colors"]=list(cat_color[:num_domains])
+# ax=sc.pl.scatter(gene_adata,alpha=1,x="pixel_y",y="pixel_x",color=domains,title=domains,color_map=cat_color,show=False,size=150000/img_adata.shape[0])
+# ax.set_aspect('equal', 'box')
+# ax.axes.invert_yaxis()
+# plt.savefig(plot_dir+"/figures/combined_pred.png", dpi=300)
+# plt.show()
+# plt.close()
+# plt.clf()
+
+```
+
 
 #### 6.4 Quantify the curve-based similarity
 
