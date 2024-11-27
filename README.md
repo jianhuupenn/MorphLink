@@ -28,36 +28,45 @@ For the step-by-step tutorial, please refer to:
 https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/tutorial.md
 <br>
 <br>
-A Jupyter Notebook of the tutorial is accessible from : 
+A Jupyter Notebook of the tutorial is accessible from: 
 <br>
 https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/tutorial.ipynb
 <br>
 Please install Jupyter in order to open this notebook.
 <br>
 <br>
-Toy data and results can be downloaded at: 
+Toy data can be downloaded at: 
 <br>
 https://drive.google.com/drive/folders/1NgJICg1jFD2HP7WGZ9vXk7GrRJRoFfSD?usp=sharing
 <br>
+Pre-generated image features can downloaded at:
+<br>
 https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/results
+<br>
+Intermediate results and figures are saved at:
 <br>
 https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures
 <br>
 <br>
 
 ## System Requirements
-Python support packages: pandas, numpy, numba, scipy, scanpy, anndata, scikit-learn, scikit-image, matplotlib, imutils, opencv-python.
+Python support packages: pandas, numpy, numba, scipy, scanpy, anndata, scikit-learn, scikit-image, matplotlib, imutils, opencv-python, leidenalg.
 
 ## Versions the software has been tested on
 Environment 1:
-- System: Mac OS Sonoma 14.0
+- System: Mac OS Sonoma 14.0 (M1 Pro)
 - Python: 3.11.5
-- Python packages: pandas = 2.1.4, numpy = 1.26.2, numba = 0.58.1, scipy = 1.11.4, scanpy = 1.9.6, anndata = 0.10.3, scikit-learn = 1.3.2, scikit-image = 0.23.2, matplotlib = 3.8.2, imutils = 0.5.4, opencv-python = 4.8.1.
+- Python packages: pandas = 2.1.4, numpy = 1.26.2, numba = 0.58.1, scipy = 1.11.4, scanpy = 1.9.6, anndata = 0.10.3, scikit-learn = 1.3.2, scikit-image = 0.23.2, matplotlib = 3.8.2, imutils = 0.5.4, opencv-python = 4.8.1, leidenalg = 0.10.2.
 
 Environment 2:
 - System: Anaconda (23.9.0)
 - Python: 3.11.5
-- Python packages: pandas = 2.0.3, numpy = 1.24.3, numba = 0.57.1, scipy = 1.11.1, scanpy = 1.9.8, anndata = 0.10.8, scikit-learn = 1.3.0, scikit-image = 0.20.0, matplotlib = 3.7.2, imutils = 0.5.4, opencv-python = 4.10.0.
+- Python packages: pandas = 2.0.3, numpy = 1.24.3, numba = 0.57.1, scipy = 1.11.1, scanpy = 1.9.8, anndata = 0.10.8, scikit-learn = 1.3.0, scikit-image = 0.20.0, matplotlib = 3.7.2, imutils = 0.5.4, opencv-python = 4.10.0, leidenalg = 0.10.2.
+
+Environment 3: 
+- System: Mac OS Big Sur 11.6.1 (Intel i9)
+- Python: 3.8.9
+- Python packages: pandas = 1.3.4, numpy = 1.20.3, numba = 0.54.1, scipy = 1.7.1, scanpy = 1.9.5, anndata = 0.9.1, scikit-learn = 1.0.1, scikit-image = 0.18.3, matplotlib = 3.7.1, imutils = 0.5.4, opencv-python = 4.5.4, leidenalg = 0.8.8.
 
 
 ## Contributing
