@@ -126,6 +126,7 @@ Data notes:
 	- all_features_logged.h5ad: final generated image features combining both mask-level image features and object-level image features.
 - The intermediate results are saved in the [figures folder](https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures).
 
+<br>
 The current version of MorphLink requres two input data: 
 <br>
 1. The gene expression matrix (N $\times$ G): expression_matrix.h5ad;
