@@ -513,7 +513,7 @@ plt.clf()
 
 ```
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/img_pred.png" width=75% height=75%>    
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/combined_pred.png" width=75% height=75%>    
 
 
 #### 6.3 Identify subregions
@@ -600,7 +600,7 @@ plt.clf()
 
 <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/scatterplot_CD74_c4_solidity_iqr.png" width=50% height=50%>    
 
-#### 6.5 Generate marginal curves
+#### 6.6 Statistical test to evaluate the confidence of the selected image feature
 
 ```python
 # perform a two-sample one-sided t-test
@@ -612,6 +612,27 @@ scipy.stats.ttest_ind(target_f_scores, other_f_scores,alternative="greater")
 TtestResult(statistic=13.484389257247123, pvalue=5.849801060163686e-41, df=4520.0)
 
 p-value is smaller than 0.05, indicating that the selected image feature has significantly higher CPSIs with the target set of genes compared to other image features.
+
+```python
+# Generate a histogram to check CPSIs distribution
+plt.hist(target_f_scores, bins=30, color="#ff7f0e", alpha=0.55, edgecolor="white", density=True, label="Target") # target image feature
+plt.hist(other_f_scores, bins=30, color="#1f77b4", alpha=0.55, edgecolor="white", density=True, label="Other") # other image features
+target_kde=gaussian_kde(target_f_scores)
+other_kde=gaussian_kde(other_f_scores)
+x_vals=np.linspace(min(target_f_scores.min(), other_f_scores.min()), max(target_f_scores.max(), other_f_scores.max()), 500)
+plt.plot(x_vals, target_kde(x_vals), color='grey', linewidth=1, alpha=0.5)
+plt.plot(x_vals, other_kde(x_vals), color='grey', linewidth=1, alpha=0.5)
+plt.title("The distribution of CPSIs between genes set and image features", fontsize=16)
+plt.xlabel("CPSI", fontsize=14)
+plt.ylabel("Frequency", fontsize=14)
+plt.legend(fontsize=14)
+plt.show()
+plt.close()
+plt.clf()
+
+```
+
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/CPSIs_distribution.png" width=65% height=65%>
 
 
 ### 7. Select samples for visual demonstration
@@ -639,101 +660,41 @@ num_sample=5
 for f in target_features:
 	if not os.path.exists(plot_dir+"/figures/"+f):
 		os.mkdir(plot_dir+"/figures/"+f)
-	visual_img=mph.sample_illustration(f, img_adata_sub, patch_info, patches, labels, plot_dir=plot_dir+"/figures/"+f, num_cuts=num_cuts, range_step=range_step, num_sample=num_sample, filter_mask_area=True, filter_cc_q100=False)
+	visual_img=mph.sample_illustration(f, img_adata, patch_info, patches, labels, plot_dir=plot_dir+"/figures/"+f, num_cuts=num_cuts, range_step=range_step, num_sample=num_sample, filter_mask_area=True, filter_cc_q100=False)
 	visual_img_list.append(visual_img)
 
 
 ```
 
-    channel 4 f_type c
-    AACGTTAGTCACAACT-1     9.332027
-    AACTGCTTCTGTTGAC-1    10.153273
-    AATCGGAACGTAGAGC-1    10.278631
-    ACAACGGATTGGAGTG-1    10.403262
-    ACAACTATTCGAGGTA-1    10.445056
-                            ...    
-    TGGCTCTAAGCGACGG-1     9.360053
-    TGGTCTTCTGATTAGA-1    10.365018
-    TGTACCAAGTTGGTAA-1    10.849007
-    TGTATGATCGTTAACC-1     8.885441
-    TGTCAGGTTAATGCAA-1    10.380715
-    Name: mask_area, Length: 66, dtype: float64
-    Cut 0, median=0.13001048133495624
-    Num of samples =  5
-    AACAGGCCATTGTCAC-1     9.263976
-    AACGGTCGTATTAGGC-1    10.355423
-    AAGCACTCGTTCGCCA-1    10.590793
-    AAGCAGATCATAATGT-1     9.836653
-    AATTCAAGGCACGATC-1    10.517592
-                            ...    
-    TGGACGTGCGATTCGG-1    10.336373
-    TGGTATGTATGGAGTC-1    10.311383
-    TGGTGCTCTACTTGAA-1    10.363788
-    TGTCAACACTTCAGTT-1    10.319893
-    TGTCGACGCACCGTGG-1    10.224846
-    Name: mask_area, Length: 67, dtype: float64
-    Cut 1, median=0.1494131139072774
-    Num of samples =  5
-    AACATATGCACTTCTA-1    10.354691
-    AACGGCGACGTCCACC-1    10.410124
-    AAGGCGTGGTATGGCT-1    10.336503
-    AAGTACTCTATTGCCG-1    10.311017
-    AATGGTATAACCGCGG-1    10.373241
-                            ...    
-    TCGTCAGTCGACGGAT-1    10.199807
-    TGCATTACCAGAATGT-1    10.149840
-    TGCATTCAGCGGTTCG-1    10.408134
-    TGCTCCGGCCGCACAA-1    10.106959
-    TGGCCAAGGTATTCAC-1    10.470363
-    Name: mask_area, Length: 67, dtype: float64
-    Cut 2, median=0.16169473705123993
-    Num of samples =  5
-    AACCAAGCTAGATACG-1    11.175409
-    AAGAATGTCGCCACAA-1    10.258186
-    AAGAGCACCATCTTAT-1    10.519700
-    AAGCCATTAGACTACC-1    10.320815
-    AATCGACGGCCAGAGC-1    10.176678
-                            ...    
-    TGATGGTTGGTGCGGT-1     9.434683
-    TGCAGAACAACTCAAG-1    10.352427
-    TGCCGCTTGTAAGTCC-1    10.512737
-    TGGAGTGCCTAAGGTT-1    10.279352
-    TGGTACCGTATGACAA-1    10.491496
-    Name: mask_area, Length: 67, dtype: float64
-    Cut 3, median=0.17718783762926382
-    Num of samples =  5
-    AACTGCTTGGTTGAAT-1    10.298566
-    AAGTTAAGGTAATCGT-1    10.522746
-    ACAGAACTTCGTGGAC-1    10.426173
-    ACGCAAGCGGAGCCGA-1    10.215338
-    ACTCAGGCTTCGTTCA-1    10.396933
-                            ...    
-    TCCAACGTACCTAAGG-1    10.580327
-    TCCTCAATCTGCTATT-1     9.812249
-    TGCATTCCACAATGAC-1    10.397970
-    TGCGGAGGCACTTCGC-1    10.324564
-    TGTTCAACGACTGCAT-1    10.257379
-    Name: mask_area, Length: 66, dtype: float64
-    Cut 4, median=0.196332503851128
-    Num of samples =  5
-
-
 
 ```python
+# Read in arrow image 
+arrow_img=cv2.imread(plot_dir+"/figures/arrow.png", cv2.IMREAD_UNCHANGED)
+arrow_img=cv2.cvtColor(arrow_img, cv2.COLOR_BGR2RGB) # convert BGR to RGB (already a numpy array)
+
 # Generate sample linkage visual demonstration
 for i in range(len(visual_img_list)):
+    f=target_features[i]
     visual_img=visual_img_list[i]
     visual_img_cvt=cv2.cvtColor(visual_img, cv2.COLOR_BGR2RGB)
-    plt.figure(figsize=(12,36))
-    plt.imshow(visual_img_cvt)
+    # resize the arrow image to match the width (have some issues here)
+    arrow_img_rz=cv2.resize(arrow_img, (visual_img_cvt.shape[1], 250), interpolation=cv2.INTER_AREA) # arrow_height = 250
+    # creat an gap
+    gap_img=(np.ones((100, visual_img_cvt.shape[1],3))*255).astype(np.uint8) # gap_height = 100
+    # combine the images vertically
+    combined_img=np.vstack((visual_img_cvt, gap_img, arrow_img_rz))
+    # plot the combined image
+    plt.figure(figsize=(15,35))
+    plt.imshow(combined_img)
     plt.axis('off')
+    plt.savefig(plot_dir+"/figures/linkage_demonstration_"+f+"+arrow.png", dpi=300, bbox_inches='tight', pad_inches=0.8)
     plt.show()
     plt.close()
+    plt.clf()
     
-
 ```
 
-<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/linkage_demonstration_c4_solidity_iqr_ncuts=5_nsamples=5.png" width=100% height=100%>
+<img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/linkage_demonstration_c4_solidity_iqr+arrow.png" width=100% height=100%>
 
 
 ### 8. Parameter settings
