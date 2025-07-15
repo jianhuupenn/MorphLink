@@ -83,6 +83,6 @@ Last update: 11/26/2024, version 1.0.4
 
 Please consider citing the following reference:
 
-- https://doi.org/10.1101/2024.08.24.609528
+- https://doi.org/10.1038/s41467-025-61142-0
 
 <br>
