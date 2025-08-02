@@ -1,6 +1,6 @@
 # MorphLink  v1.0.4
 
-## MorphLink: Bridging Cell Morphological Behaviors and Molecular Dynamics in Multi-modal Spatial Omics
+## Bridging cell morphological behaviors and molecular dynamics in multi-modal spatial omics with MorphLink
 
 
 #### Jing Huang, Chenyang Yuan, Jiahui Jiang, Jianfeng Chen, Sunil S. Badve, Yesim Gokmen-Polar, Rossana L. Segura, Xinmiao Yan, Alexander Lazar, Jianjun Gao, Bing Yao, Michael Epstein, Linghua Wang* and Jian Hu*
@@ -83,6 +83,6 @@ Last update: 11/26/2024, version 1.0.4
 
 Please consider citing the following reference:
 
-- https://doi.org/10.1038/s41467-025-61142-0
+-[Huang, J., Yuan, C., Jiang, J., Chen, J., Badve, S. S., Gokmen-Polar, Y., ... & Hu, J. (2025). Bridging cell morphological behaviors and molecular dynamics in multi-modal spatial omics with MorphLink. Nature Communications, 16(1), 5878.] (https://doi.org/10.1038/s41467-025-61142-0)
 
 <br>
