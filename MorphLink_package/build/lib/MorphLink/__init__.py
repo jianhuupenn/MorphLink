@@ -1,4 +1,4 @@
-__version__ = '1.0.6'
+__version__ = '1.0.7'
 from .calculate_dis import *
 from .cc_util import *
 from .contour_util import *
