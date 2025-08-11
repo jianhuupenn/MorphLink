@@ -3,15 +3,12 @@ import os,csv,time,re,pickle,argparse
 import numpy as np
 import pandas as pd
 import cv2
-from scipy.sparse import issparse
 import matplotlib.colors as clr
 import matplotlib.pyplot as plt
 import seaborn as sns
 import warnings
 warnings.filterwarnings("ignore")
-# Local import
-from .pattern_similarity import *
-
+from scipy.stats import gaussian_kde
 
 # Set colors
 cnt_color=clr.LinearSegmentedColormap.from_list('pink_green', ['#3AB370',"#EAE7CC","#FD1593"], N=256)
@@ -19,6 +16,70 @@ cat_color=["#F56867","#FEB915","#C798EE","#59BE86","#7495D3","#D1D1D1","#6D1A9C"
 
 
 #---------------------------------------------- Functions ----------------------------------------------
+# test patch size
+# testified
+def test_patch_size(input_img, patch_size, pixel_x, pixel_y, plot_dir):
+	half_size=patch_size/2
+	img_new=input_img.copy()
+	for i in range(len(pixel_x)):
+		x=pixel_x[i]
+		y=pixel_y[i]
+		img_new[int(x-half_size):int(x+half_size), int(y-half_size):int(y+half_size),:]=0
+	img_new=cv2.resize(img_new, (2000, 2000), interpolation = cv2.INTER_AREA)
+	img_new_cvt=cv2.cvtColor(img_new, cv2.COLOR_BGR2RGB)
+	plt.imshow(img_new_cvt)
+	plt.show()
+	# save the test patch size image
+	cv2.imwrite(plot_dir+'/figures/test_patch_size.jpg', img_new)
+
+
+# testified
+def louvain_clustering(input_adata, pca_num, n_neighbors, resolution, pred_key):
+	# Reduce dimensions by PCA
+	pca = PCA(n_components=pca_num)
+	pca.fit(input_adata.X)
+	embed=pca.transform(input_adata.X)
+	tmp=sc.AnnData(embed)
+	# Leiden clustering
+	sc.pp.neighbors(tmp, n_neighbors=n_neighbors)
+	sc.tl.leiden(tmp,resolution=resolution)
+	y_pred=tmp.obs['leiden'].astype(int).to_numpy()
+	input_adata.obs[pred_key]=y_pred
+	input_adata.obs[pred_key]=input_adata.obs[pred_key].astype("category")
+	return input_adata
+
+
+# testified
+def cat_figure(input_adata, x_col, y_col, color_key, color_map, plot_dir):
+	ax=sc.pl.scatter(input_adata,alpha=1,x=x_col,y=y_col,color=color_key,title=color_key,color_map=color_map,show=False,size=150000/input_adata.shape[0])
+	ax.set_aspect('equal', 'box')
+	ax.axes.invert_yaxis()
+	plt.savefig(plot_dir+"/figures/gene_pred.png", dpi=300)
+	plt.show()
+	plt.close()
+	plt.clf()
+
+
+# target_f_scores: CPSIs between the selected image feature and the target set of genes
+# other_f_scores: CPSIs between other image features and the target set of genes
+# testified
+def cpsi_distri_histo(target_f_scores, other_f_scores):
+	plt.hist(target_f_scores, bins=30, color="#ff7f0e", alpha=0.55, edgecolor="white", density=True, label="Target") # target image feature
+	plt.hist(other_f_scores, bins=30, color="#1f77b4", alpha=0.55, edgecolor="white", density=True, label="Other") # other image features
+	target_kde=gaussian_kde(target_f_scores)
+	other_kde=gaussian_kde(other_f_scores)
+	x_vals=np.linspace(min(target_f_scores.min(), other_f_scores.min()), max(target_f_scores.max(), other_f_scores.max()), 500)
+	plt.plot(x_vals, target_kde(x_vals), color='grey', linewidth=1, alpha=0.5)
+	plt.plot(x_vals, other_kde(x_vals), color='grey', linewidth=1, alpha=0.5)
+	plt.title("The distribution of CPSIs between genes set and image features", fontsize=16)
+	plt.xlabel("CPSI", fontsize=14)
+	plt.ylabel("Frequency", fontsize=14)
+	plt.legend(fontsize=14)
+	plt.show()
+	plt.close()
+	plt.clf()
+
+
 # genes_set: specify a set of genes (or from DE analysis) that are related to the interested biological process
 # mask_channel: interested mask channel
 # testified
@@ -73,5 +134,28 @@ def marginal_curve(input_gene_adata, input_img_adata, CPSI, g, range_step=0.25, 
 		z.append(np.round(np.mean(sub_tmp.obs[f]), 3))
 		z.append(np.round(np.mean(sub_tmp.obs[g]), 3))
 	return f, x, y, z
+
+
+# generate sample linkage visual demonstration
+# testified
+def sample_linkage_visualization(visual_img_list, target_features, arrow_img, plot_dir):
+	for i in range(len(visual_img_list)):
+	    f=target_features[i]
+	    visual_img=visual_img_list[i]
+	    visual_img_cvt=cv2.cvtColor(visual_img, cv2.COLOR_BGR2RGB)
+	    # resize the arrow image to match the width (have some issues here)
+	    arrow_img_rz=cv2.resize(arrow_img, (visual_img_cvt.shape[1], 250), interpolation=cv2.INTER_AREA) # arrow_height = 250
+	    # creat an gap
+	    gap_img=(np.ones((100, visual_img_cvt.shape[1],3))*255).astype(np.uint8) # gap_height = 100
+	    # combine the images vertically
+	    combined_img=np.vstack((visual_img_cvt, gap_img, arrow_img_rz))
+	    # plot the combined image
+	    plt.figure(figsize=(15,35))
+	    plt.imshow(combined_img)
+	    plt.axis('off')
+	    plt.savefig(plot_dir+"/figures/linkage_demonstration_"+f+"+arrow.png", dpi=300, bbox_inches='tight', pad_inches=0.8)
+	    plt.show()
+	    plt.close()
+	    plt.clf()
 
 
