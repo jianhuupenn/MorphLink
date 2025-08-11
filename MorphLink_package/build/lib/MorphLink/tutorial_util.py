@@ -3,6 +3,10 @@ import os,csv,time,re,pickle,argparse
 import numpy as np
 import pandas as pd
 import cv2
+import scanpy as sc
+import scipy
+from scipy.sparse import issparse
+from sklearn.decomposition import PCA
 import matplotlib.colors as clr
 import matplotlib.pyplot as plt
 import seaborn as sns
