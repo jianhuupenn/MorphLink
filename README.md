@@ -83,6 +83,6 @@ Last update: 11/26/2024, version 1.0.4
 
 Please consider citing the following reference:
 
--[Huang, J., Yuan, C., Jiang, J., Chen, J., Badve, S. S., Gokmen-Polar, Y., ... & Hu, J. (2025). Bridging cell morphological behaviors and molecular dynamics in multi-modal spatial omics with MorphLink. Nature Communications, 16(1), 5878.](https://doi.org/10.1038/s41467-025-61142-0)  
+[Huang, J., Yuan, C., Jiang, J., Chen, J., Badve, S. S., Gokmen-Polar, Y., ... & Hu, J. (2025). Bridging cell morphological behaviors and molecular dynamics in multi-modal spatial omics with MorphLink. Nature Communications, 16(1), 5878.](https://doi.org/10.1038/s41467-025-61142-0)  
 
 <br>
