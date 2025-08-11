@@ -113,7 +113,7 @@ mph.__version__
 
 
 
-    '1.0.4'
+    '1.0.7'
 
 
 ### 3. Read in data
@@ -173,26 +173,13 @@ d0, d1=img.shape[0], img.shape[1]
 ```python
 # Set the patch size
 patch_size=400
-half_size=patch_size/2
 
 # spatial coordinates of spots
 pixel_x=gene_adata.obs["pixel_x"].tolist()
 pixel_y=gene_adata.obs["pixel_y"].tolist()
 
 # Test the patch size 
-img_new=img.copy()
-for i in range(len(pixel_x)):
-	x=pixel_x[i]
-	y=pixel_y[i]
-	img_new[int(x-half_size):int(x+half_size), int(y-half_size):int(y+half_size),:]=0
-
-
-img_new=cv2.resize(img_new, (2000, 2000), interpolation = cv2.INTER_AREA)
-img_new_cvt=cv2.cvtColor(img_new, cv2.COLOR_BGR2RGB)
-plt.imshow(img_new_cvt)
-plt.show()
-# save the test patch size image
-cv2.imwrite(plot_dir+'/figures/test_patch_size.jpg', img_new)
+mph.test_patch_size(img, patch_size, pixel_x, pixel_y, plot_dir)
 
 ```
 <img src="https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures/test_patch_size.jpg" width=30% height=30%>
@@ -451,32 +438,18 @@ cat_color=["#F56867","#FEB915","#C798EE","#59BE86","#7495D3","#D1D1D1","#6D1A9C"
 ```python
 # Gene expression
 # Louvain clustering (optional step if pathologists annotations are available)
-pca = PCA(n_components=50)
-pca.fit(gene_adata.X)
-embed=pca.transform(gene_adata.X)
-tmp=sc.AnnData(embed)
-sc.pp.neighbors(tmp, n_neighbors=10)
-sc.tl.leiden(tmp,resolution=0.1)
-y_pred=tmp.obs['leiden'].astype(int).to_numpy()
-gene_adata.obs["gene_pred"]=y_pred
+gene_adata=mph.louvain_clustering(input_adata=gene_adata, pca_num=50, n_neighbors=10, resolution=0.1, pred_key="gene_pred")
 # or by SpaGCN
 gene_adata.obs["gene_pred"]=gene_adata.obs["spagcn_pred"].astype('category') # use the spatial clustering results from SpaGCN
 ```
 
 ```python
-# check spatial clustering of gene expression
+# Check spatial clustering of gene expression
 domains="gene_pred"
 num_domains=len(gene_adata.obs[domains].unique())
 gene_adata.uns[domains+"_colors"]=list(cat_color[:num_domains])
-ax=sc.pl.scatter(gene_adata,alpha=1,x="pixel_y",y="pixel_x",color=domains,title=domains,color_map=cat_color,show=False,size=150000/gene_adata.shape[0])
-ax.set_aspect('equal', 'box')
-ax.axes.invert_yaxis()
-plt.savefig(plot_dir+"/figures/gene_pred.png", dpi=300)
-plt.show()
-plt.close()
-plt.clf()
-# ax=spg.plot_spatial_domains_ez_mode(gene_adata, domain_name="gene_pred", x_name="pixel_y", y_name="pixel_x", plot_color=cat_color, size=150000/gene_adata.shape[0], 
-	# show=False, save=True,save_dir=plot_dir+"/figures/gene_pred.png")
+
+mph.cat_figure(input_adata=gene_adata, x_col="pixel_y", y_col="pixel_x", color_key=domains, color_map=cat_color, plot_dir=plot_dir)
 
 ```
 
@@ -484,34 +457,19 @@ plt.clf()
 
 
 ```python
-# Image features
+# Image features 
 # Louvain clustering (optional step if pathologists annotations are available)
-pca = PCA(n_components=50)
-pca.fit(img_adata.X)
-embed=pca.transform(img_adata.X)
-tmp=sc.AnnData(embed)
-sc.pp.neighbors(tmp, n_neighbors=10)
-sc.tl.leiden(tmp,resolution=0.05)
-y_pred=tmp.obs['leiden'].astype(int).to_numpy()
-len(np.unique(y_pred)) # number of louvain clusters for image features
-img_adata.obs["img_pred"]=y_pred
-img_adata.obs["img_pred"]=img_adata.obs["img_pred"].astype('category')
+img_adata=mph.louvain_clustering(input_adata=img_adata, pca_num=50, n_neighbors=10, resolution=0.05, pred_key="img_pred")
+
 ```
 
 ```python
-# check spatial clustering of image features
+# Check spatial clustering of image features
 domains="img_pred"
 num_domains=len(img_adata.obs[domains].unique())
 img_adata.uns[domains+"_colors"]=list(cat_color[:num_domains])
-ax=sc.pl.scatter(img_adata,alpha=1,x="pixel_y",y="pixel_x",color=domains,title=domains,color_map=cat_color,show=False,size=150000/img_adata.shape[0])
-ax.set_aspect('equal', 'box')
-ax.axes.invert_yaxis()
-plt.savefig(plot_dir+"/figures/img_pred.png", dpi=300)
-plt.show()
-plt.close()
-plt.clf()
-# ax=spg.plot_spatial_domains_ez_mode(img_adata, domain_name="img_pred", x_name="pixel_y", y_name="pixel_x", plot_color=cat_color,size=180000/img_adata.shape[0], 
-	# show=False, save=True,save_dir=plot_dir+"/figures/img_pred.png")
+
+mph.cat_figure(input_adata=img_adata, x_col="pixel_y", y_col="pixel_x", color_key=domains, color_map=cat_color, plot_dir=plot_dir)
 
 ```
 
@@ -637,20 +595,7 @@ p-value is smaller than 0.05, indicating that the selected image feature has sig
 
 ```python
 # Generate a histogram to check CPSIs distribution
-plt.hist(target_f_scores, bins=30, color="#ff7f0e", alpha=0.55, edgecolor="white", density=True, label="Target") # target image feature
-plt.hist(other_f_scores, bins=30, color="#1f77b4", alpha=0.55, edgecolor="white", density=True, label="Other") # other image features
-target_kde=gaussian_kde(target_f_scores)
-other_kde=gaussian_kde(other_f_scores)
-x_vals=np.linspace(min(target_f_scores.min(), other_f_scores.min()), max(target_f_scores.max(), other_f_scores.max()), 500)
-plt.plot(x_vals, target_kde(x_vals), color='grey', linewidth=1, alpha=0.5)
-plt.plot(x_vals, other_kde(x_vals), color='grey', linewidth=1, alpha=0.5)
-plt.title("The distribution of CPSIs between genes set and image features", fontsize=16)
-plt.xlabel("CPSI", fontsize=14)
-plt.ylabel("Frequency", fontsize=14)
-plt.legend(fontsize=14)
-plt.show()
-plt.close()
-plt.clf()
+mph.cpsi_distri_histo(target_f_scores=target_f_scores, other_f_scores=other_f_scores)
 
 ```
 
@@ -669,10 +614,10 @@ labels=np.load(plot_dir+"/results/cc_no_details.npy")
 
 ```python
 # Load in the generated patch_info, patches, and labels
-# plot_dir="."
-# patch_info=pd.read_csv(plot_dir+"/results/patch_info.csv", header=0, index_col=0)
-# patches=np.load(plot_dir+"/results/patches.npy")
-# labels=np.load(plot_dir+"/results/cc_no_details.npy")
+plot_dir="."
+patch_info=pd.read_csv(plot_dir+"/results/patch_info.csv", header=0, index_col=0)
+patches=np.load(plot_dir+"/results/patches.npy")
+labels=np.load(plot_dir+"/results/cc_no_details.npy")
 
 # Specify a set of interested image features
 target_features = [f]
@@ -695,24 +640,7 @@ arrow_img=cv2.imread(plot_dir+"/figures/arrow.png", cv2.IMREAD_UNCHANGED)
 arrow_img=cv2.cvtColor(arrow_img, cv2.COLOR_BGR2RGB) # convert BGR to RGB (already a numpy array)
 
 # Generate sample linkage visual demonstration
-for i in range(len(visual_img_list)):
-    f=target_features[i]
-    visual_img=visual_img_list[i]
-    visual_img_cvt=cv2.cvtColor(visual_img, cv2.COLOR_BGR2RGB)
-    # resize the arrow image to match the width (have some issues here)
-    arrow_img_rz=cv2.resize(arrow_img, (visual_img_cvt.shape[1], 250), interpolation=cv2.INTER_AREA) # arrow_height = 250
-    # creat an gap
-    gap_img=(np.ones((100, visual_img_cvt.shape[1],3))*255).astype(np.uint8) # gap_height = 100
-    # combine the images vertically
-    combined_img=np.vstack((visual_img_cvt, gap_img, arrow_img_rz))
-    # plot the combined image
-    plt.figure(figsize=(15,35))
-    plt.imshow(combined_img)
-    plt.axis('off')
-    plt.savefig(plot_dir+"/figures/linkage_demonstration_"+f+"+arrow.png", dpi=300, bbox_inches='tight', pad_inches=0.8)
-    plt.show()
-    plt.close()
-    plt.clf()
+mph.sample_linkage_visualization(visual_img_list=visual_img_list, target_features=target_features, arrow_img=arrow_img, plot_dir=plot_dir)
     
 ```
 
