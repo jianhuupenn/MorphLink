@@ -13,6 +13,7 @@ import seaborn as sns
 import warnings
 warnings.filterwarnings("ignore")
 from scipy.stats import gaussian_kde
+from .pattern_similarity import pattern_similarity
 
 # Set colors
 cnt_color=clr.LinearSegmentedColormap.from_list('pink_green', ['#3AB370',"#EAE7CC","#FD1593"], N=256)
