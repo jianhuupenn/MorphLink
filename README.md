@@ -1,4 +1,4 @@
-# MorphLink  v1.0.6
+# MorphLink  v1.0.7
 
 ## Bridging cell morphological behaviors and molecular dynamics in multi-modal spatial omics with MorphLink
 
