@@ -75,8 +75,16 @@ Souce code: [Github](https://github.com/jianhuupenn/MorphLink)
 
 We are continuing adding new features. Bug reports or feature requests are welcome. 
 
-Last update: 11/26/2024, version 1.0.4
+Last update: 8/10/2025, version 1.0.7.
 
+
+### New in v1.0.7:
+- Added new packaged functions for common tasks into **tutorial_util.py** for easier use and improved readability.
+- Now users can run the full pipeline with only a few function calls.
+- Added new helper functions:
+  - `test_patch_size`: determine the suitable image patch sizes for different spatial transcriptomics techniques data.
+  - `cpsi_eva` and `cpsi_distri_histo`: evaluate spatial linkages between the target image feature and a set of interested genes, with histogram-based visualization of distribution differences.
+  - `sample_linkage_visualization`: generate visual demonstration of the identified gene-morphology linkage.
 
 
 ## References
