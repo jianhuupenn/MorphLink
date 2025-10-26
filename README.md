@@ -47,6 +47,10 @@ Intermediate results and figures are saved at:
 <br>
 https://github.com/jianhuupenn/MorphLink/blob/main/tutorial/figures
 <br>
+Intermediate patches and masks are saved at:
+<br>
+https://drive.google.com/drive/folders/1fzeyG0rbpl83AL0Qu15Pu0yDg48cJXxL?usp=sharing
+<br>
 <br>
 
 ## System Requirements
@@ -75,7 +79,7 @@ Souce code: [Github](https://github.com/jianhuupenn/MorphLink)
 
 We are continuing adding new features. Bug reports or feature requests are welcome. 
 
-Last update: 8/10/2025, version 1.0.7.
+Last update: 10/26/2025, version 1.0.7.
 
 
 ### New in v1.0.7:
@@ -85,7 +89,6 @@ Last update: 8/10/2025, version 1.0.7.
   - `test_patch_size`: determine the suitable image patch sizes for different spatial transcriptomics techniques data.
   - `cpsi_eva` and `cpsi_distri_histo`: evaluate spatial linkages between the target image feature and a set of interested genes, with histogram-based visualization of distribution differences.
   - `sample_linkage_visualization`: generate visual demonstration of the identified gene-morphology linkage.
-
 
 ## References
 
