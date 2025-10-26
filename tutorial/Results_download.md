@@ -1,0 +1,1 @@
+Interdemiate results (including patches and masks) and final extracted image features of toy data can be downloaded at: https://drive.google.com/drive/folders/1fzeyG0rbpl83AL0Qu15Pu0yDg48cJXxL?usp=sharing 
