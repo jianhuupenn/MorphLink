@@ -55,10 +55,25 @@ If you do not have Python3.5 or Python3.6 installed, consider installing Anacond
 
 ```python
 # create an environment called MorphLink_env
-conda create -n MorphLink_env python=3.7.9
+conda create -n MorphLink_env python=3.11.5 -y
 
 # activate your environment 
 conda activate MorphLink_env
+# install required packages under Environments 1 or 2 (specified in the main page, please make sure scipy version is `>=`1.11.1)
+pip install \
+	pandas==2.1.4 \
+	numpy==1.26.2 \
+	numba==0.58.1 \
+	scipy==1.11.4 \
+	scanpy==1.9.6 \
+	anndata==0.10.3 \
+	scikit-learn==1.3.2 \
+	scikit-image==0.23.2 \
+	matplotlib==3.8.2 \
+	imutils==0.5.4 \
+	opencv-python==4.8.1 \
+	leidenalg==0.10.2
+
 git clone https://github.com/jianhuupenn/MorphLink
 cd MorphLink/MorphLink_package/
 python3 setup.py build
