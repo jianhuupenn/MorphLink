@@ -67,11 +67,6 @@ Environment 2:
 - Python: 3.11.5
 - Python packages: pandas = 2.0.3, numpy = 1.24.3, numba = 0.57.1, scipy = 1.11.1, scanpy = 1.9.8, anndata = 0.10.8, scikit-learn = 1.3.0, scikit-image = 0.20.0, matplotlib = 3.7.2, imutils = 0.5.4, opencv-python = 4.10.0, leidenalg = 0.10.2.
 
-Environment 3: 
-- System: Mac OS Big Sur 11.6.1 (Intel i9)
-- Python: 3.8.9
-- Python packages: pandas = 1.3.4, numpy = 1.20.3, numba = 0.54.1, scipy = 1.7.1, scanpy = 1.9.5, anndata = 0.9.1, scikit-learn = 1.0.1, scikit-image = 0.18.3, matplotlib = 3.7.1, imutils = 0.5.4, opencv-python = 4.5.4, leidenalg = 0.8.8.
-
 
 ## Contributing
 
