@@ -425,7 +425,7 @@ From the box-plots, we can find that Mask 0 and Mask 1 capture the most dominant
 ```python
 # Gene expression
 gene_adata=sc.read("./toy_data/exp_tumor.h5ad")
-gene_adata.X=(np.array(gene_adata.X.A) if issparse(gene_adata.X) else np.array(gene_adata.X))
+gene_adata.X=(np.array(gene_adata.X.A) if issparse(gene_adata.X) else gene_adata.X)
 sc.pp.log1p(gene_adata)
 
 # Histology image
