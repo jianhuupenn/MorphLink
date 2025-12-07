@@ -277,7 +277,7 @@ pixel_x=gene_adata.obs["pixel_x"].tolist()
 pixel_y=gene_adata.obs["pixel_y"].tolist()
 
 # Test the patch size 
-mph.test_patch_size(img, patch_size, pixel_x, pixel_y, plot_dir)
+mph.test_patch_size(img, initial_patch_size, pixel_x, pixel_y, plot_dir)
 
 ```
 
