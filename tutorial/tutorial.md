@@ -261,7 +261,7 @@ mph.step6_Plot_Masks(plot_dir=plot_dir, d0=d0, d1=d1, masks=masks, patch_size=pa
 
 ```
 
-### 4. Image segmentation (adapted version for Visium HD data)
+### 4. Image segmentation (Adapted version for Visium HD data)
 
 #### 4.1 Determine patch size
 
