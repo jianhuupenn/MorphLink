@@ -182,6 +182,8 @@ We recommend using larger bin size (e.g., 32 µm) when applying to Visium HD dat
 - and helps improve the processing speed for the following segmentation and feature extraction steps. 
 <br>
 
+#### For 10x Visium or Spatial Transcriptomics data, please refer to 4. Image segmentation.
+#### For Visium HD data, please refer to 4. Image segmentation (Adapted version for Visium HD data).
 ### 4. Image segmentation
 
 #### 4.1 Determine patch size
@@ -261,7 +263,7 @@ mph.step6_Plot_Masks(plot_dir=plot_dir, d0=d0, d1=d1, masks=masks, patch_size=pa
 
 ```
 
-### 4. Image segmentation (Adapted version for Visium HD data)
+### 4. Image segmentation (Adapted version for Visium HD data) (Optional)
 
 #### 4.1 Determine patch size
 
