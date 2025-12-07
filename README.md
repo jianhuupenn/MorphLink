@@ -74,7 +74,7 @@ Souce code: [Github](https://github.com/jianhuupenn/MorphLink)
 
 We are continuing adding new features. Bug reports or feature requests are welcome. 
 
-Last update: 11/1/2025, version 1.0.7. (updated environment setup instructions in the tutorial)
+Last update: 12/7/2025, version 1.0.7. (updated environment setup instructions and incorporated suggestions when applying to Visium HD data in the tutorial)
 
 
 ### New in v1.0.7:
@@ -84,6 +84,7 @@ Last update: 11/1/2025, version 1.0.7. (updated environment setup instructions i
   - `test_patch_size`: determine the suitable image patch sizes for different spatial transcriptomics techniques data.
   - `cpsi_eva` and `cpsi_distri_histo`: evaluate spatial linkages between the target image feature and a set of interested genes, with histogram-based visualization of distribution differences.
   - `sample_linkage_visualization`: generate visual demonstration of the identified gene-morphology linkage.
+- Incorporated suggestions for handling Visium HD data and provided an optional patch-resizing step to improve computational efficiency.
 
 ## References
 
