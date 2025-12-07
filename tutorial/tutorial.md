@@ -177,6 +177,10 @@ img=cv2.imread("./toy_data/img_tumor.jpg")
 d0, d1=img.shape[0], img.shape[1]
 
 ```
+We recommend using larger bin size (e.g., 32 µm) when applying to Visium HD data, which 
+- ensures that each spot image patch captures sufficient morphology patterns of multiple cells
+- and helps improve the processing speed for the following segmentation and feature extraction steps. 
+<br>
 
 ### 4. Image segmentation
 
@@ -216,6 +220,89 @@ patch_info["y"]=patch_info["pixel_y"]
 patch_info.to_csv(plot_dir+"/results/patch_info.csv")
 np.save(plot_dir+"/results/patches.npy", patches)
 
+```
+
+
+```python
+patches=np.load(plot_dir+"/results/patches.npy")
+patch_info=pd.read_csv(plot_dir+"/results/patch_info.csv", header=0, index_col=0)
+```
+
+#### 4.3 Segment each patch into masks
+
+- n_clusters: equals to the number of masks within each patch (default value is 10) 
+- refine the initial K-Means clusters by a convolution layer
+
+
+```python
+# Perform a K-Means clustering to divide the pixels of each image patch into clusters 
+# then employ a convolution layer to refine the cluster assignment
+mph.step4_Segmentation(plot_dir=plot_dir, n_clusters=10, refine=True, refine_threshold=4) # take around 2h
+mph.check_dic_list(plot_dir)
+
+```
+
+#### 4.4 Match masks across patches
+
+- num_mask_each: the number of masks within each patch (default value is 10)
+- mapping_threshold1: max single color channel difference, choose all channels
+- mapping_threshold2: max single color channel difference, choose one channel
+
+
+```python
+# Identify shared clusters across patches based on color distance
+num_mask_each=10
+mapping_threshold1=30  # max single color channel difference, choose all channels
+mapping_threshold2=60  # max single color channel difference, choose one channel
+masks, masks_index=mph.step5_Extract_Masks(plot_dir=plot_dir, patch_size=patch_size, num_mask_each=num_mask_each, mapping_threshold1=mapping_threshold1, mapping_threshold2=mapping_threshold2)
+
+# Plot the segmentated masks
+mph.step6_Plot_Masks(plot_dir=plot_dir, d0=d0, d1=d1, masks=masks, patch_size=patch_size, mapping_threshold1=mapping_threshold1, mapping_threshold2=mapping_threshold2)
+
+```
+
+### 4. Image segmentation (adapted version for Visium HD data)
+
+#### 4.1 Determine patch size
+
+- patch_size: default value for 32 µm Visium HD is 240
+
+
+```python
+# Set the patch size
+initial_patch_size=240
+
+# spatial coordinates of spots
+pixel_x=gene_adata.obs["pixel_x"].tolist()
+pixel_y=gene_adata.obs["pixel_y"].tolist()
+
+# Test the patch size 
+mph.test_patch_size(img, patch_size, pixel_x, pixel_y, plot_dir)
+
+```
+
+#### 4.2 Patch split and resize for Visium HD
+We resize patches to improve computational efficiency for image segmentation. 
+- patches: a 4D array with a shape of (N, m, m, 3), where N stands for the total number of spots and m denotes the specified patch size
+
+
+```python
+initial_patches=mph.patch_split_for_ST(img=img, patch_size=initial_patch_size, spot_info=gene_adata.obs, x_name="pixel_x", y_name="pixel_y")
+# spot information
+patch_info=gene_adata.obs.copy() 
+patch_info["x"]=patch_info["pixel_x"]
+patch_info["y"]=patch_info["pixel_y"]
+
+# resize patches
+patch_size=150
+patches=np.zeros((initial_patches.shape[0], patch_size, patch_size, 3), dtype=initial_patches.dtype)
+for i in range(initial_patches.shape[0]):
+	patches[i]=cv2.resize(initial_patches[i], (patch_size, patch_size), interpolation=cv2.INTER_AREA) # cv2.INTER_AREA is preferred for image shrinking
+
+
+# Save the splitted image patches and its patch_info
+patch_info.to_csv(plot_dir+"/results/patch_info.csv")
+np.save(plot_dir+"/results/patches.npy", patches)
 ```
 
 
